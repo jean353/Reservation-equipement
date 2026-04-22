@@ -82,7 +82,7 @@ export default function Equipment() {
           <h1 className="text-3xl font-bold text-gray-900">Équipements</h1>
           <p className="text-gray-500">Consultez et réservez le matériel disponible.</p>
         </div>
-        <button className="flex items-center justify-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all shadow-sm">
+        <button className="flex items-center justify-center px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-all shadow-sm">
           <Plus className="w-5 h-5 mr-2" /> Nouvel Équipement
         </button>
       </div>
@@ -93,7 +93,7 @@ export default function Equipment() {
         </div>
         <input
           type="text"
-          className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 bg-white shadow-sm"
+          className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary-500 bg-white shadow-sm"
           placeholder="Rechercher par nom, type ou numéro de série..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
@@ -123,8 +123,8 @@ export default function Equipment() {
               <tr key={item.id} className="hover:bg-gray-50 transition-colors">
                 <td className="px-6 py-4">
                   <div className="flex items-center">
-                    <div className="p-2 bg-blue-50 rounded-lg mr-3">
-                      <Monitor className="w-5 h-5 text-blue-600" />
+                    <div className="p-2 bg-primary-50 rounded-lg mr-3">
+                      <Monitor className="w-5 h-5 text-primary-600" />
                     </div>
                     <span className="font-medium text-gray-900">{item.name}</span>
                   </div>
@@ -151,7 +151,7 @@ export default function Equipment() {
                   <button 
                     onClick={() => handleOpenModal(item)}
                     disabled={item.status !== 'available'}
-                    className="text-blue-600 font-medium hover:text-blue-800 transition-colors disabled:text-gray-300"
+                    className="text-primary-600 font-medium hover:text-primary-800 transition-colors disabled:text-gray-300"
                   >
                     Réserver
                   </button>

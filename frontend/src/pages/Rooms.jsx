@@ -82,7 +82,7 @@ export default function Rooms() {
           <h1 className="text-3xl font-bold text-gray-900">Salles</h1>
           <p className="text-gray-500">Gérez et réservez vos espaces de travail.</p>
         </div>
-        <button className="flex items-center justify-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all shadow-sm">
+        <button className="flex items-center justify-center px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-all shadow-sm">
           <Plus className="w-5 h-5 mr-2" /> Nouvelle Salle
         </button>
       </div>
@@ -93,7 +93,7 @@ export default function Rooms() {
         </div>
         <input
           type="text"
-          className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 bg-white shadow-sm"
+          className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary-500 bg-white shadow-sm"
           placeholder="Rechercher une salle par nom ou lieu..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
@@ -108,7 +108,7 @@ export default function Rooms() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredRooms.map((room) => (
             <div key={room.id} className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-all group">
-              <div className="h-40 bg-gradient-to-br from-blue-500 to-indigo-600 relative overflow-hidden">
+              <div className="h-40 bg-gradient-to-br from-primary-500 to-indigo-600 relative overflow-hidden">
                 <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-all"></div>
                 <div className="absolute inset-0 flex items-center justify-center p-4">
                   <h3 className="text-white font-bold text-2xl text-center">{room.name}</h3>
@@ -122,11 +122,11 @@ export default function Rooms() {
               <div className="p-5 space-y-4">
                 <div className="space-y-2">
                   <div className="flex items-center text-gray-600">
-                    <MapPin className="w-4 h-4 mr-2 text-blue-500" />
+                    <MapPin className="w-4 h-4 mr-2 text-primary-500" />
                     <span className="text-sm">{room.location}</span>
                   </div>
                   <div className="flex items-center text-gray-600">
-                    <Users className="w-4 h-4 mr-2 text-blue-500" />
+                    <Users className="w-4 h-4 mr-2 text-primary-500" />
                     <span className="text-sm">{room.capacity} personnes</span>
                   </div>
                 </div>
@@ -139,7 +139,7 @@ export default function Rooms() {
 
                 <button 
                   onClick={() => handleOpenModal(room)}
-                  className="w-full py-2 bg-blue-50 text-blue-600 border border-blue-100 rounded-lg font-medium hover:bg-blue-600 hover:text-white transition-all"
+                  className="w-full py-2 bg-primary-50 text-primary-600 border border-primary-100 rounded-lg font-medium hover:bg-primary-600 hover:text-white transition-all"
                 >
                   Réserver cette salle
                 </button>

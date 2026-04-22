@@ -47,7 +47,7 @@ export class ReservationsService {
           ],
         },
       });
-      if (roomConflict) throw new ConflictException('La salle est déjà réservée pour ce créneau.');
+      if (roomConflict) throw new ConflictException('Salle occupée pour ce créneau.');
     }
 
     // 2. Check for Equipment conflicts if equipmentIds are provided

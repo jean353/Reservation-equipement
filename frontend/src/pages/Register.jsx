@@ -40,7 +40,7 @@ export default function Register() {
     <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
       <div className="max-w-md w-full space-y-8 bg-white p-10 rounded-2xl shadow-xl border border-gray-100">
         <div className="text-center">
-          <div className="mx-auto h-12 w-12 bg-blue-600 rounded-xl flex items-center justify-center text-white">
+          <div className="mx-auto h-12 w-12 bg-primary-600 rounded-xl flex items-center justify-center text-white">
             <UserPlus className="h-7 w-7" />
           </div>
           <h2 className="mt-6 text-3xl font-extrabold text-gray-900">Créer un compte</h2>
@@ -65,7 +65,7 @@ export default function Register() {
                 <input
                   type="text"
                   required
-                  className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 transition-all"
+                  className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary-500 transition-all"
                   placeholder="Jean Dupont"
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
@@ -82,7 +82,7 @@ export default function Register() {
                 <input
                   type="email"
                   required
-                  className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 transition-all"
+                  className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary-500 transition-all"
                   placeholder="email@example.com"
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
@@ -99,7 +99,7 @@ export default function Register() {
                 <input
                   type="password"
                   required
-                  className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 transition-all"
+                  className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary-500 transition-all"
                   placeholder="••••••••"
                   value={formData.password}
                   onChange={(e) => setFormData({ ...formData, password: e.target.value })}
@@ -116,7 +116,7 @@ export default function Register() {
                 <input
                   type="password"
                   required
-                  className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 transition-all"
+                  className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary-500 transition-all"
                   placeholder="••••••••"
                   value={formData.confirmPassword}
                   onChange={(e) => setFormData({ ...formData, confirmPassword: e.target.value })}
@@ -129,7 +129,7 @@ export default function Register() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 transition-all"
+              className="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 disabled:opacity-50 transition-all"
             >
               {loading ? 'Création en cours...' : "S'inscrire"}
             </button>
@@ -138,7 +138,7 @@ export default function Register() {
           <div className="text-center">
             <p className="text-sm text-gray-600">
               Déjà un compte ?{' '}
-              <Link to="/login" className="font-medium text-blue-600 hover:text-blue-500 underline decoration-blue-200">
+              <Link to="/login" className="font-medium text-primary-600 hover:text-primary-500 underline decoration-primary-200">
                 Se connecter
               </Link>
             </p>

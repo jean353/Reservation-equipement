@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, Request } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, Request, ForbiddenException } from '@nestjs/common';
 import { ReservationsService } from './reservations.service';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 // Role and ReservationStatus are now strings in SQLite
@@ -43,6 +43,9 @@ export class ReservationsController {
     @Body('status') status: string,
     @Request() req: any,
   ) {
+    if (req.user.role !== 'ADMIN') {
+      throw new ForbiddenException('Only admins can update reservation status');
+    }
     return this.reservationsService.updateStatus(id, status, req.user.email);
   }
 }

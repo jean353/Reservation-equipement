@@ -29,7 +29,7 @@ export default function Login() {
     <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
       <div className="max-w-md w-full space-y-8 bg-white p-10 rounded-2xl shadow-xl border border-gray-100">
         <div className="text-center">
-          <div className="mx-auto h-12 w-12 bg-blue-600 rounded-xl flex items-center justify-center text-white">
+          <div className="mx-auto h-12 w-12 bg-primary-600 rounded-xl flex items-center justify-center text-white">
             <LogIn className="h-7 w-7" />
           </div>
           <h2 className="mt-6 text-3xl font-extrabold text-gray-900">Connexion</h2>
@@ -56,7 +56,7 @@ export default function Login() {
                 <input
                   type="email"
                   required
-                  className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 transition-all"
+                  className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary-500 transition-all"
                   placeholder="admin@atelierit.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
@@ -73,7 +73,7 @@ export default function Login() {
                 <input
                   type="password"
                   required
-                  className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 transition-all"
+                  className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary-500 transition-all"
                   placeholder="••••••••"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
@@ -86,7 +86,7 @@ export default function Login() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 transition-all"
+              className="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 disabled:opacity-50 transition-all"
             >
               {loading ? 'Connexion en cours...' : 'Se connecter'}
             </button>
@@ -95,7 +95,7 @@ export default function Login() {
           <div className="text-center">
             <p className="text-sm text-gray-600">
               Pas encore de compte ?{' '}
-              <Link to="/register" className="font-medium text-blue-600 hover:text-blue-500 underline decoration-blue-200">
+              <Link to="/register" className="font-medium text-primary-600 hover:text-primary-500 underline decoration-primary-200">
                 S'enregistrer
               </Link>
             </p>
