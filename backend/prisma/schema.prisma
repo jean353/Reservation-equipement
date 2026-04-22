@@ -1,0 +1,82 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String         @id @default(uuid())
+  email         String         @unique
+  password      String
+  name          String
+  role          String         @default("USER") // ADMIN, MANAGER, USER
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  reservations  Reservation[]
+  notifications Notification[]
+}
+
+model Room {
+  id           String        @id @default(uuid())
+  name         String
+  capacity     Int
+  location     String
+  description  String?
+  status       String        @default("available") // available, maintenance, occupied
+  reservations Reservation[]
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+}
+
+model Equipment {
+  id           String        @id @default(uuid())
+  name         String
+  type         String
+  serialNumber String        @unique
+  quantity     Int           @default(1)
+  status       String        @default("available") // available, maintenance, in_use
+  reservations Reservation[] @relation("EquipmentReservations")
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+}
+
+model Reservation {
+  id           String            @id @default(uuid())
+  userId       String
+  user         User              @relation(fields: [userId], references: [id])
+  roomId       String?
+  room         Room?             @relation(fields: [roomId], references: [id])
+  equipments   Equipment[]       @relation("EquipmentReservations")
+  startTime    DateTime
+  endTime      DateTime
+  status       String            @default("PENDING") // PENDING, APPROVED, REJECTED, CANCELLED
+  title        String
+  description  String?
+  history      ReservationHistory[]
+  createdAt    DateTime          @default(now())
+  updatedAt    DateTime          @updatedAt
+
+  @@index([startTime, endTime])
+}
+
+model Notification {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  message   String
+  read      Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
+
+model ReservationHistory {
+  id            String      @id @default(uuid())
+  reservationId String
+  reservation   Reservation @relation(fields: [reservationId], references: [id])
+  action        String      // CREATED, APPROVED, REJECTED, CANCELLED, UPDATED
+  performedBy   String      // User name or ID
+  details       String?
+  timestamp     DateTime    @default(now())
+}
