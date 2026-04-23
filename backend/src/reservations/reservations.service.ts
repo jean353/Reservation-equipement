@@ -1,7 +1,10 @@
-import { Injectable, ConflictException, NotFoundException } from '@nestjs/common';
+import {
+  Injectable,
+  ConflictException,
+  NotFoundException,
+} from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 // ReservationStatus is now a string
-
 
 @Injectable()
 export class ReservationsService {
@@ -34,7 +37,15 @@ export class ReservationsService {
   }
 
   async create(data: any) {
-    const { userId, roomId, equipmentIds, startTime, endTime, title, description } = data;
+    const {
+      userId,
+      roomId,
+      equipmentIds,
+      startTime,
+      endTime,
+      title,
+      description,
+    } = data;
 
     // 1. Check for Room conflicts if roomId is provided
     if (roomId) {
@@ -43,11 +54,15 @@ export class ReservationsService {
           roomId,
           status: { in: ['APPROVED', 'PENDING'] },
           OR: [
-            { startTime: { lt: new Date(endTime) }, endTime: { gt: new Date(startTime) } },
+            {
+              startTime: { lt: new Date(endTime) },
+              endTime: { gt: new Date(startTime) },
+            },
           ],
         },
       });
-      if (roomConflict) throw new ConflictException('Salle occupée pour ce créneau.');
+      if (roomConflict)
+        throw new ConflictException('Salle occupée pour ce créneau.');
     }
 
     // 2. Check for Equipment conflicts if equipmentIds are provided
@@ -62,8 +77,12 @@ export class ReservationsService {
           },
         });
         if (equipConflict) {
-          const equip = await this.prisma.equipment.findUnique({ where: { id: equipId } });
-          throw new ConflictException(`L'équipement ${equip?.name} est déjà réservé.`);
+          const equip = await this.prisma.equipment.findUnique({
+            where: { id: equipId },
+          });
+          throw new ConflictException(
+            `L'équipement ${equip?.name} est déjà réservé.`,
+          );
         }
       }
     }
@@ -77,7 +96,9 @@ export class ReservationsService {
         endTime: new Date(endTime),
         user: { connect: { id: userId } },
         room: roomId ? { connect: { id: roomId } } : undefined,
-        equipments: equipmentIds ? { connect: equipmentIds.map(id => ({ id })) } : undefined,
+        equipments: equipmentIds
+          ? { connect: equipmentIds.map((id) => ({ id })) }
+          : undefined,
         history: {
           create: {
             action: 'CREATED',
@@ -108,13 +129,15 @@ export class ReservationsService {
   async getReports() {
     // Basic stats for reporting
     const totalReservations = await this.prisma.reservation.count();
-    const approvedReservations = await this.prisma.reservation.count({ where: { status: 'APPROVED' } });
+    const approvedReservations = await this.prisma.reservation.count({
+      where: { status: 'APPROVED' },
+    });
     const mostReservedRooms = await this.prisma.room.findMany({
       include: { _count: { select: { reservations: true } } },
       orderBy: { reservations: { _count: 'desc' } },
       take: 5,
     });
-    
+
     return {
       totalReservations,
       approvedReservations,

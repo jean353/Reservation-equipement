@@ -40,7 +40,12 @@ export const roomService = {
   create: (data) => api.post('/rooms', data),
   update: (id, data) => api.patch(`/rooms/${id}`, data),
   delete: (id) => api.delete(`/rooms/${id}`),
+  uploadImages: (id, formData) => api.post(`/rooms/${id}/images`, formData, {
+    headers: { 'Content-Type': 'multipart/form-data' }
+  }),
+  deleteImage: (imageId) => api.delete(`/rooms/images/${imageId}`),
 };
+
 
 export const equipmentService = {
   getAll: () => api.get('/equipment'),

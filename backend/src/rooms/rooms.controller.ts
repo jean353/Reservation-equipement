@@ -1,6 +1,18 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  UseInterceptors,
+  UploadedFiles,
+} from '@nestjs/common';
 import { RoomsService } from './rooms.service';
-import { JwtAuthGuard } from '../auth/jwt-auth.guard'; // I'll create this next
+import { FilesInterceptor } from '@nestjs/platform-express';
+import { diskStorage } from 'multer';
+import { extname } from 'path';
 
 @Controller('rooms')
 export class RoomsController {
@@ -29,5 +41,32 @@ export class RoomsController {
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.roomsService.remove(id);
+  }
+
+  @Post(':id/images')
+  @UseInterceptors(
+    FilesInterceptor('files', 10, {
+      storage: diskStorage({
+        destination: './uploads',
+        filename: (req, file, cb) => {
+          const randomName = Array(32)
+            .fill(null)
+            .map(() => Math.round(Math.random() * 16).toString(16))
+            .join('');
+          return cb(null, `${randomName}${extname(file.originalname)}`);
+        },
+      }),
+    }),
+  )
+  uploadImages(
+    @Param('id') id: string,
+    @UploadedFiles() files: Express.Multer.File[],
+  ) {
+    return this.roomsService.addImages(id, files);
+  }
+
+  @Delete('images/:imageId')
+  deleteImage(@Param('imageId') imageId: string) {
+    return this.roomsService.deleteImage(imageId);
   }
 }
